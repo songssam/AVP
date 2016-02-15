@@ -231,3 +231,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# Bootstrap
+**/Project2/a2/src/a2/wwwroot/lib
