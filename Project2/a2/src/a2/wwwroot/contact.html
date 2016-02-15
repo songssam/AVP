@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/bootswatch/flatly/bootstrap.css" />
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
+    <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <style>
+        input[type=text], textarea {
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;
+            padding: 3px 0px 3px 0px;
+            margin: 5px 1px 3px 0px;
+            border: 1px solid #DDDDDD;
+        }
+
+            input[type=text]:focus, textarea:focus {
+                box-shadow: 0px 0px 5px rgb(00,23,66);
+                padding: 3px 0px 3px 3px;
+                margin: 5px 1px 3px 0px;
+                border: 1px solid rgb(45, 0, 255);
+            }
+
+             #cent{
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="margin:20px">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><b>Samsong</b></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="cent">
+                    <li class="inactive" style="width:120px" align="center" alt=""><a href="index.html"><i class="fa fa-home fa-lg"></i> Home<span class="sr-only">(current)</span></a></li>
+                    <li class="inactive" style="width:120px" align="center" alt=""><a href="blog.html"><i class="fa fa-paper-plane fa-lg"></i> Blog<span class="sr-only">(current)</span></a></li>
+                    <li class="inactive" style="width:120px" align="center"><a href="resume.html"><i class="fa fa-file-text fa-lg"></i> Resume<span class="sr-only">(current)</span></a></li>
+                    <li class="active" style="width:120px" align="center"><a href="contact.html"><i class="fa fa-phone fa-lg"></i> Contact<span class="sr-only">(current)</span></a></li>
+
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Social Media <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://www.facebook.com/samuel.song.7" target="_blank">Facebook</a></li>
+                            <li><a href="https://www.linkedin.com/in/samuel-song-639504b5?trk=hp-identity-name" target="_blank">LinkedIn</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid" style="margin:45px; margin-top:45px">
+        <h1><b>Contact</b></h1><br />
+        <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <label for="name">Your name:</label><br />
+                <input id="name" class="input" name="name" type="text" value="" size="32" required /><br />
+            </div>
+            <div class="row">
+                <label for="email">Your email:</label><br />
+                <input id="email" class="input" name="email" type="text" value="" size="32" required /><br />
+            </div>
+            <div class="row">
+                <label for="message">Your message:</label><br />
+                <textarea id="message" class="input" name="message" rows="7" cols="30" required></textarea><br />
+            </div>
+
+            <div class="row">
+
+                <input id="submit_button" type="submit" value="Send email" href="mailto:songssam@gmail.com?subject=(web$20no%20subject)&body=message" />
+            </div>
+        </form>
+
+
+    </div>
+    <div class="container" align="right">
+
+    </div>
+</body>
+</html>
