@@ -82,12 +82,12 @@
 
         function getUser() {
             var deferred = $q.defer();
-            $http.get('https://api.github.com/search/users?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=' + $scope.bigCurrentPage).then(
+            $http.get('https://api.github.com/search/users?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=10').then(
 
 
             function handleSuccess(response) {
                 console.log('Hurray!');
-                console.log('https://api.github.com/search/users?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=' + $scope.bigCurrentPage)
+                console.log('https://api.github.com/search/users?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=10')
                 deferred.resolve(response.data);
                 $scope.type = 1;
                 $scope.showTable = 1;
@@ -98,11 +98,11 @@
 
         function getRepository() {
             var deferred = $q.defer();
-            $http.get('https://api.github.com/search/repositories?q=' + $scope.search_box + '&page=1&per_page=10').then(
+            $http.get('https://api.github.com/search/repositories?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=10').then(
                 function (response) {
                     console.log('github response repository');
                     console.log($scope.search_box);
-                    console.log('https://api.github.com/search/repositories?q=' + $scope.search_box + '&page=1&per_page=10');
+                    console.log('https://api.github.com/search/repositories?q=' + $scope.search_box + '&page=' + $scope.bigCurrentPage + '&per_page=10');
                     deferred.resolve(response.data);
                     $scope.type = 2;
                     $scope.showTable = 2;

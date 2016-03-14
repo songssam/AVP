@@ -37,7 +37,7 @@
                         return userService.getRepo($stateParams.login);
                     },
                     followers: function (userService, $stateParams) {
-                        return userService.getFollowers($stateParams.login);
+                        return userService.getFollowers($stateParams.login, $stateParams.login.open_issues_count);
                     }
                 }
             })
@@ -55,6 +55,6 @@
                         return repoService.getRepo($stateParams.login);
                     }
                 }
-            })
-        });
+    })
+});
 })();

@@ -1,19 +1,18 @@
 ﻿<style>
     .id {
-      
         text-align: left;
         font-size: 30px;
-        display:inline;
+        display: inline;
     }
 
     .id1 {
         font-weight: 600;
-        display:inline;
+        display: inline;
+        line-height: 85%;
     }
 
     .id2 {
-        margin-left: 20px;
-        font-weight: 300;
+        line-height: 85%;
     }
 
     th {
@@ -26,87 +25,121 @@
         vertical-align: middle;
     }
 
-    @media (min-width: 768px) {
-      .div.container.ng-scope{
-            width: 600px;
-        }
+    .container {
+        margin-left: 50px auto;
+        margin-right: 50px auto;
+        align-content:center;
+        align-items:center;
     }
-
-    @media (min-width: 992px) {
-        .div.container.ng-scope {
-            width: 720px;
-        }
+    
+    .paging-align {
+        text-align: center;
     }
-
-  
-    @media (min-width: 1200px) {
-    .div.container.ng-scope{
-        max-width: 970px;
-
-    }
-}
 </style>
 
 <div class="container">
     <br /><br />
     <div class="id">
-        <div class="id1" style="float:left">
-
-            Repo Name:  <br />
-            Repo Link:  <br />
-            Description:<br />
-            Stars:      <br />
-            Watchers:   <br />
-            Forks:      <br />
-            Open Issues:<br />
-            Language:   <br />
-            Clone URL:  <br />
+        <div class="id1">Repo Name:  </div><br />
+        <div class="id2">
+            {{ login.name }}
         </div>
-        <div class="id2" style="float:right">
-
-            {{ login.name }}            <br />
-            <a href="{{ login.html_url }}">{{ login.html_url }}</a><br />
-            {{ login.description }}     <br />
-            {{ login.stargazers_count }}<br />
-            {{ login.watchers_count }}  <br />
-            {{ login.forks }}           <br />
-            {{ login.open_issues }}     <br />
-            {{ login.language }}        <br />
-            {{ login.clone_url}}        <br />
+        <div class="id1">
+            Repo Link:
+        </div><br />
+        <div class="id2">
+            <a href="{{ login.html_url }}">{{ login.html_url }}</a>
+        </div> <div class="id1">
+            Description:
         </div>
+        <div class="id2">
+            {{ login.description }}
+        </div>
+        <div class="id1">
+            Stars:
+        </div>
+        <div class="id2">
+            {{ login.stargazers_count }}
+        </div>
+        <div class="id1">
+            Watchers:
+        </div>
+        <div class="id2">
+            {{ login.watchers_count }}
+        </div>
+        <div class="id1">
+            Forks:
+        </div>
+        <div class="id2">
+            {{ login.forks }}
+        </div>
+        <div class="id1">
+            Open Issues:
+        </div><br />
+        <div class="id2">
+            {{ login.open_issues }}
+        </div>
+        <div class="id1">
+            Language:
+        </div><br />
+        <div class="id2">
+            {{ login.language }}
+        </div>
+        <div class="id1">
+            Clone URL:
+        </div>
+        <div class="id2">
+            {{ login.clone_url}}
+        </div>
+
+
     </div>
+    <br />
+    <br />
+    <br />
+    <table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
+        <tr>
+            <td>
+                <strong>Commit Author:</strong>
+                {{ data.commit.author.name }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Commit URL:</strong>
+                {{ data.url }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Message: </strong>
+                {{ data.commit.message }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Comment Count: </strong>
+                {{ data.commit.comment_count }}
+            </td>
+        </tr>
+    </table>
+    <br /><br />
+    asdsad
+    <table class="table table-striped" ng-repeat="i in issues.saveIssues">
+        <tr>
+            <td> 1111111 </td>
+        </tr>
+        <tr>
+            <td> asdsa{{ i.title }}</td>
+        </tr>
+        <tr>
+            <td> {{ i.user.login }}</td>
+        </tr>
+
+    </table>
+    123123
+      <div class="paging-align">
+            <uib-pagination total-items="bigTotalItems" ng-submit="getIssue()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+    
 </div>
-<br />
-<br />
-<br />
-<table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
-    <tr>
-        <td>
-            <strong>Commit Author:</strong>
-            {{ data.commit.author.name }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <strong>Commit URL:</strong>
-            {{ data.url }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <strong>Message: </strong>
-            {{ data.commit.message }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <strong>Comment Count: </strong>
-            {{ data.commit.comment_count }}
-        </td>
-    </tr>
-</table>
-<br /><br />
-<table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
-
-
-</table>

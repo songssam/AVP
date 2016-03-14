@@ -16,10 +16,15 @@
     .table > tbody > tr > td {
         vertical-align: middle;
     }
-    .noResult{
-        font-weight:600;
-        font-size:30px;
-        color:red;
+
+    .noResult {
+        font-weight: 600;
+        font-size: 30px;
+        color: red;
+    }
+
+    .paging-align {
+        text-align: center;
     }
 </style>
 
@@ -53,8 +58,7 @@
                 </td>
             </tr>
         </table>
-        <div ng-controller="searchController">
-            <hr />
+        <hr /><div class="paging-align">
             <uib-pagination total-items="bigTotalItems" ng-change="updateSearch()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
         </div>
     </div>
@@ -86,14 +90,11 @@
                 </td>
             </tr>
         </table>
-        
-        <div ng-controller="searchController">
-            <hr />
-            <pagination total-items="bigTotalItems"  ng-change="updateSearch()" on-select-page="pageChanged(bigCurrentpage)" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></pagination>
-
+        <div class="paging-align">
+            <uib-pagination total-items="bigTotalItems" ng-change="updateSearch()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
         </div>
-    </div>
-    <div class="noResult" ng-show="showTable == 7">
-        No Result Found!!
+        <div class="noResult" ng-show="showTable == 7">
+            No Result Found!!
+        </div>
     </div>
 </div>
