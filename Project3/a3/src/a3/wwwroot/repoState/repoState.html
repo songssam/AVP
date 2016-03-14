@@ -28,12 +28,18 @@
     .container {
         margin-left: 50px auto;
         margin-right: 50px auto;
-        align-content:center;
-        align-items:center;
+        align-content: center;
+        align-items: center;
     }
-    
+
     .paging-align {
         text-align: center;
+    }
+
+    .noResult {
+        font-weight: 600;
+        font-size: 25px;
+        color: red;
     }
 </style>
 
@@ -97,6 +103,12 @@
     <br />
     <br />
     <br />
+    <div class="id">
+
+        <div class="id1">
+            Commits:
+        </div>
+    </div>
     <table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
         <tr>
             <td>
@@ -123,23 +135,29 @@
             </td>
         </tr>
     </table>
-    <br /><br />
-    asdsad
-    <table class="table table-striped" ng-repeat="i in issues.saveIssues">
+    <br /><br /><div class="id">
+        <div class="id1">
+            Issues:
+        </div>
+        <div class="noResult"  ng-hide="showTable == 1">
+            Found No Issue.
+        </div>
+    </div>
+    <table class="table table-striped" ng-repeat="i in data.saveIssues" ng-click="updateIssue()" ng-show="showTable == 1">
         <tr>
-            <td> 1111111 </td>
+            <td> <b>Title: </b>{{ i.title }} </td>
         </tr>
         <tr>
-            <td> asdsa{{ i.title }}</td>
+            <td> <b>Created: </b>{{ i.created_at }}</td>
         </tr>
         <tr>
-            <td> {{ i.user.login }}</td>
+            <td> <b>Link to issue: </b>{{ i.url }}</td>
         </tr>
 
     </table>
-    123123
-      <div class="paging-align">
-            <uib-pagination total-items="bigTotalItems" ng-submit="getIssue()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
-        </div>
-    
+
+    <div class="paging-align" ng-show="showTable == 1">
+        <uib-pagination total-items="bigTotalItems" ng-click="updateIssue()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
+    </div>
+
 </div>
