@@ -1,0 +1,112 @@
+﻿<style>
+    .id {
+      
+        text-align: left;
+        font-size: 30px;
+        display:inline;
+    }
+
+    .id1 {
+        font-weight: 600;
+        display:inline;
+    }
+
+    .id2 {
+        margin-left: 20px;
+        font-weight: 300;
+    }
+
+    th {
+        font-weight: 800;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    td {
+        vertical-align: middle;
+    }
+
+    @media (min-width: 768px) {
+      .div.container.ng-scope{
+            width: 600px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .div.container.ng-scope {
+            width: 720px;
+        }
+    }
+
+  
+    @media (min-width: 1200px) {
+    .div.container.ng-scope{
+        max-width: 970px;
+
+    }
+}
+</style>
+
+<div class="container">
+    <br /><br />
+    <div class="id">
+        <div class="id1" style="float:left">
+
+            Repo Name:  <br />
+            Repo Link:  <br />
+            Description:<br />
+            Stars:      <br />
+            Watchers:   <br />
+            Forks:      <br />
+            Open Issues:<br />
+            Language:   <br />
+            Clone URL:  <br />
+        </div>
+        <div class="id2" style="float:right">
+
+            {{ login.name }}            <br />
+            <a href="{{ login.html_url }}">{{ login.html_url }}</a><br />
+            {{ login.description }}     <br />
+            {{ login.stargazers_count }}<br />
+            {{ login.watchers_count }}  <br />
+            {{ login.forks }}           <br />
+            {{ login.open_issues }}     <br />
+            {{ login.language }}        <br />
+            {{ login.clone_url}}        <br />
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
+    <tr>
+        <td>
+            <strong>Commit Author:</strong>
+            {{ data.commit.author.name }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Commit URL:</strong>
+            {{ data.url }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Message: </strong>
+            {{ data.commit.message }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>Comment Count: </strong>
+            {{ data.commit.comment_count }}
+        </td>
+    </tr>
+</table>
+<br /><br />
+<table class="table table-striped" ng-repeat="data in data.saveData | limitTo:5">
+
+
+</table>

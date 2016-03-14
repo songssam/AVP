@@ -1,0 +1,99 @@
+﻿<style>
+    th, td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    th {
+        font-weight: 800;
+        font-size: 35px;
+    }
+
+    .table1 tr:first-child td {
+        border-top: 1px solid grey;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+    .noResult{
+        font-weight:600;
+        font-size:30px;
+        color:red;
+    }
+</style>
+
+<div id="contactform">
+    <h1>Search <small>What you need.</small></h1>
+    <form ng-submit="updateSearch()">
+        <div class="form-group" ng-required="true" ng-model="myctrl">
+            <input type="radio" ng-model="type" value="1" /><label>User</label>
+            <input type="radio" ng-model="type" value="2" /><label>Repository</label>
+            <input typeof="submit" name="name" style="visibility: visible;" ng-model="search_box" class="form-control" type="text" ng-required="true" />
+            <button class="btn btn-primary" value="3" style="float:right" ng-click="">Search</button>
+        </div>
+    </form>
+    <br /><br /><br /><br />
+    <div ng-show="showTable == 1">
+        <table class="table table-striped">
+            <tr>
+                <th>Image</th>
+                <th>Login ID</th>
+                <th>Link</th>
+            </tr>
+            <tr ng-repeat="data in data.saveData">
+                <td>
+                    <img ng-src="{{ data.avatar_url }}" style="width:175px;height:175px;">
+                </td>
+                <td>
+                    <h2>{{ data.login }}</h2>
+                </td>
+                <td>
+                    <a ng-click="goUserLink(data.login)"><h3> Link to {{ data.login }} </h3></a>
+                </td>
+            </tr>
+        </table>
+        <div ng-controller="searchController">
+            <hr />
+            <uib-pagination total-items="bigTotalItems" ng-change="updateSearch()" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+    </div>
+    <div ng-show="showTable == 2">
+        <table class="table table-striped">
+            <tr>
+                <th>Image</th>
+                <th>Open Issues</th>
+                <th>Stars</th>
+                <th>Language</th>
+                <th>Link </th>
+
+            </tr>
+            <tr ng-repeat="data in data.saveData">
+                <td>
+                    <img ng-src="{{ data.owner.avatar_url }}" style="width:175px;height:175px;">
+                </td>
+                <td>
+                    <h2>{{ data.open_issues }}</h2>
+                </td>
+                <td>
+                    <h2>{{ data.stargazers_count}}</h2>
+                </td>
+                <td>
+                    <h2>{{ data.language }}</h2>
+                </td>
+                <td>
+                    <a align="center" ng-click="goRepoLink(data.full_name)"><h3> Link to {{ data.login }} </h3></a>
+                </td>
+            </tr>
+        </table>
+        
+        <div ng-controller="searchController">
+            <hr />
+            <pagination total-items="bigTotalItems"  ng-change="updateSearch()" on-select-page="pageChanged(bigCurrentpage)" ng-model="bigCurrentPage" max-size="maxSize" class="pagination" boundary-link-numbers="true" rotate="false"></pagination>
+
+        </div>
+    </div>
+    <div class="noResult" ng-show="showTable == 7">
+        No Result Found!!
+    </div>
+</div>

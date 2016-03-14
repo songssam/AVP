@@ -1,0 +1,97 @@
+﻿<style>
+    .id {
+        align-content: center;
+        text-align: left;
+        font-size: 30px;
+    }
+
+    .id1 {
+        font-weight: 600;
+    }
+
+    .id2 {
+        margin-left: 20px;
+        font-weight: 300;
+    }
+
+    th {
+        font-weight: 800;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+        font-size: 15px;
+    }
+
+
+    .dp1 {
+        display: inline;
+        list-style-type: none;
+        padding-right: 20px;
+    }
+
+    .thumbnail {
+        width: 25%;
+        display: inline;
+    }
+</style>
+
+<div class="container" style="align-content:center; width:85%">
+    <img ng-src="{{ login.avatar_url }}" style="width:400px;height:400px;">
+    <div class="id" style="float:right">
+        <br /><br />
+        <div class="id1" style="float:left">
+
+            login ID:    <br />
+            Name:     <br />
+            Blog:     <br />
+            Location: <br />
+            Git Profile:<br />
+        </div>
+        <div class="id2" style="float:left">
+
+            {{ login.login }}   <br />
+            {{ login.name }}    <br />
+            {{ login.blog }}    <br />
+            {{ login.location }}<br />
+            <a href="{{ login.html_url }}">{{ login.html_url }}</a><br />
+            <button class="btn btn-primary" ng-click="updateInfo">Search</button>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>Repo Name</th>
+        <th>Stars</th>
+        <th>Watcher Count</th>
+        <th>Open Issues</th>
+        <th>Language</th>
+        <th>Repo State</th>
+    </tr>
+    <tr ng-repeat="data in data.saveData">
+        <td> {{ data.name }}</td>
+        <td> {{ data.stargazers_count }}</td>
+        <td> {{ data.watchers_count}}</td>
+        <td> {{ data.open_issues }}</td>
+        <td> {{ data.language}}</td>
+        <td> <a ng-click="goRepoLink(data.full_name)">Link to {{ data.full_name }}</a></td>
+    </tr>
+</table>
+<div class="id1">
+    <h2>Followers: </h2>
+</div><br />
+<div class="dp1" >
+    <table>
+        <tr ng-repeat="i in followers.saveFollowers">
+            <td>
+                {{ i.login }}<br />
+                <img class="thumbnail" ng-src="{{ i.avatar_url }}">
+            </td>          
+        </tr>
+    </table>
+</div>
