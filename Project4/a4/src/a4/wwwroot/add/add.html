@@ -1,0 +1,30 @@
+﻿<body>
+    <form name="result" ng-submit="updateSearch()">
+        <div class="col-xs-offset-1 col-xs-10" ng-required="true" ng-model="myctrl">
+            <div id="a0">Create</div><br />
+            <div id="a1"> Description: </div>
+            <input class="col-xs-12 col-sm-12" typeof="submit" name="input1" style="visibility: visible;" ng-model="add_desc" type="text" />
+            <div id="a1"> Due Date: </div>
+            
+                <label id="a3">Date: </label>
+                <input type="text" id="inputbox1" maxlength="4" placeholder="YYYY" typeof="submit" name="input1" ng-model="add_year" />
+                <label id="a3">&nbsp-&nbsp</label>
+                <input type="text" id="inputbox2" maxlength="2" placeholder="MM" typeof="submit" name="input1" ng-model="add_month" />
+                <label id="a3">&nbsp-&nbsp</label>
+                <input type="text" id="inputbox2" maxlength="2" placeholder="DD" typeof="submit" name="input1" ng-model="add_day" />
+                <label id="a3">&nbsp&nbsp&nbsp&nbspTime: </label>
+                <input type="text" id="inputbox2" maxlength="2" placeholder="hh" typeof="submit" name="input1" ng-model="add_hour" />
+                <label id="a3">&nbsp:&nbsp</label>
+                <input type="text" id="inputbox2" maxlength="2" placeholder="mm" typeof="submit" name="input1" ng-model="add_minute" />
+            <br />
+            <div id="a1"> Tags: </div>
+            <input class="col-xs-12 col-sm-12" typeof="submit" name="input1" style="visibility: visible;" ng-model="add_tags" type="text" />
+            <div id="a1"> State: </div>
+            <input type="radio" ng-model="type" value="Active" /><label id="a2">Active</label>
+            <input type="radio" ng-model="type" value="Completed" /><label id="a2">Completed</label>
+            <br />
+
+            <button class="btn btn-primary" style="float:right" ng-click="createTodo()">Create</button>
+        </div>
+    </form>
+</body>

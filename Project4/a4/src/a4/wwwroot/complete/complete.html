@@ -1,0 +1,44 @@
+﻿<div class="container">
+    <div id="a0">Completed List</div><br />
+    <table class="table table-striped">
+        <tr>
+            <th>
+                <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                    description
+                    <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'saveData.description' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'dueDate'; sortReverse = !sortReverse">
+                    Due Date
+                    <span ng-show="sortType == 'dueDate' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'saveData.dueDate' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>Tag</th>
+            <th>State</th>
+            <th>Delete</th>
+        </tr>
+        <tr ng-repeat="data in data.saveData | orderBy:sortType:sortReverse |  filter: 'Completed' as results">
+            <td>
+                <h3>{{ data.description }}</h3>
+            </td>
+            <td>
+                <h3>{{ data.dueDate }}</h3>
+            </td>
+            <td>
+                <h3>{{ data.tags }}</h3>
+            </td>
+            <td>
+                <h3>{{ data.state }}</h3>
+            </td>
+            <td>
+                <div form="delete">
+                    <a ng-click="deleteResult(data.id)"><h3> Delete </h3></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

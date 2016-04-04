@@ -1,0 +1,87 @@
+﻿[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}
+    input[type=text] {
+        height: 35px;
+    }
+
+    #a0 {
+        font-size: 33px;
+        font-weight: 800;
+    }
+
+    #a1 {
+        font-size: 23px;
+        font-weight: 600;
+    }
+
+    #a2 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #a3 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #a4 {
+        font-size: 17px;
+    }
+
+    input[type=radio] {
+        width: 4%;
+        height: 2em;
+        margin-top: -4px;
+        vertical-align: middle;
+    }
+
+    #leftAlign {
+        text-align: left;
+    }
+
+    #inputbox1 {
+        width: 80px;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    #inputbox2 {
+        width: 50px;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .form-group {
+    }
+
+    #input1, #input2 {
+        display: inline;
+        align-content:center;
+        text-align: center;
+    }
+
+     th, td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    th {
+        font-weight: 800;
+        font-size: 30px;
+    }
+
+    .table1 tr:first-child td {
+        border-top: 1px solid grey;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+
+    .paging-align {
+        text-align: center;
+    }
+    input[type=number]{
+    width: 75px;
+} 
