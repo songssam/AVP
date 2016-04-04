@@ -39,13 +39,18 @@
             var setTime = moment(new Date());
             setTime = setTime.add($scope.calcHour, 'hours');
 
+            console.log(now);
+            console.log(setTime);
             for (var i = 0; i < $scope.data.saveData.length; i++) {
                 $scope.data.saveData[i].check = '';
                 var dueDateFromDB = $scope.data.saveData[i].dueDate;
+                console.log('D ' +dueDateFromDB);
                 // Diff btwn today and due
                 var diffFromToday = moment.duration(now.diff(dueDateFromDB));
+                console.log('here ' + diffFromToday);
                 var hours = diffFromToday.asHours();
-                if (hours >= 0) {
+                console.log('hour ' + hours)
+                if (hours >= 12) {
                     $scope.data.saveData[i].check = 'Red';
                 }
                 // Diff btwn set and due
@@ -53,7 +58,7 @@
 
 
                 var hours1 = diffToSet.asHours();
-                if (hours < 0 && hours1 > 0) {
+                if (hours < 12 && hours1 > 12) {
                     $scope.data.saveData[i].check = 'Yellow';
                 }
             }
@@ -87,8 +92,8 @@
               function (imageUrl) {
                   $scope.data.saveData = imageUrl;
                   console.log(' DATA ' + $scope.data.saveData);
-                  $scope.alarmSet();
-
+                   $scope.alarmSet();
+           
               });
         }
 
@@ -112,7 +117,6 @@
                     console.log('http://localhost:35000/api/project/tag/')
                     deferred.resolve(response.data);
                 });
-
             }
             return deferred.promise;
 

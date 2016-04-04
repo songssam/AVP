@@ -28,6 +28,7 @@
 
                 $http.post('http://localhost:35000/api/project', item);
                 $state.go('search');
+                location.reload();
             }
         }
     }

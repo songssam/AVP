@@ -7,7 +7,7 @@
             $scope.login = login;
             $scope.type = "Active";
             $scope.data;
-
+            $scope.update;
 
 
             $scope.change = function () {
@@ -50,6 +50,8 @@
                 if (!isNaN($scope.add_year) && !isNaN($scope.add_month) && !isNaN($scope.add_day) && !isNaN($scope.add_hour) && !isNaN($scope.add_minute)) {
                     $http.put('http://localhost:35000/api/project/', item);
                     $state.go('search');
+                    location.reload();
+
                 }
             }
         }
