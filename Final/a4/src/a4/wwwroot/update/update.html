@@ -1,0 +1,70 @@
+﻿<style>
+    input[type=text] {
+        height: 35px;
+    }
+
+    #a0 {
+        font-size: 27px;
+        font-weight: 800;
+    }
+
+    #a1 {
+        font-size: 23px;
+        font-weight: 800;
+    }
+
+    #a2 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #a3 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    input[type=radio] {
+        width: 4%;
+        height: 2em;
+        margin-top: -4px;
+        vertical-align: middle;
+    }
+
+    #leftAlign {
+        text-align: left;
+    }
+
+    .form-group {
+    }
+</style>
+
+<body>
+    <form name="result" ng-submit="updateSearch()">
+
+        <div class="col-xs-offset-1 col-xs-10" ng-required="true" ng-model="myctrl" >
+            <div id="a0">Update</div><br />
+            <div id="a1" style="display:inline-block"> Description: </div> <div id="a4" style="display:inline-block"> &nbsp&nbsp {{ data.description }}</div>
+            <input class="col-xs-12 col-sm-12" typeof="submit" name="input1" style="visibility: visible;" ng-model="add_desc" type="text"/> <br />
+            <div id="a1" style="display:inline-block"> Due Date: </div> <div id="a4" style="display:inline-block"> &nbsp&nbsp {{ data.dueDate }}</div> <br />
+            <label id="a3">Date: </label>
+            <input type="text" id="inputbox1" maxlength="4" placeholder="YYYY" typeof="submit" name="input1" ng-model="add_year" />
+            <label id="a3">&nbsp-&nbsp</label>
+            <input type="text" id="inputbox2" maxlength="2" placeholder="MM" typeof="submit" name="input1" ng-model="add_month" />
+            <label id="a3">&nbsp-&nbsp</label>
+            <input type="text" id="inputbox2" maxlength="2" placeholder="DD" typeof="submit" name="input1" ng-model="add_day" />
+            <label id="a3">&nbsp&nbsp&nbsp&nbspTime: </label>
+            <input type="text" id="inputbox2" maxlength="2" placeholder="hh" typeof="submit" name="input1" ng-model="add_hour" />
+            <label id="a3">&nbsp:&nbsp</label>
+            <input type="text" id="inputbox2" maxlength="2" placeholder="mm" typeof="submit" name="input1" ng-model="add_minute" />
+            <br />
+            <div id="a1" style="display:inline-block"> Tags: </div> <div id="a4" style="display:inline-block"> &nbsp&nbsp {{ data.tags }}</div> <br />
+            <input value="fucked" class="col-xs-12 col-sm-12" typeof="submit" name="input1" ng-model="add_tags" type="text" />
+            <div id="a1"> State: </div>
+            <input type="radio" ng-model="type" value="Active" /><label id="a2">Active</label>
+            <input type="radio" ng-model="type" value="Completed" /><label id="a2">Completed</label>
+            <br />
+
+            <button class="btn btn-primary" style="float:right" ng-click="change()">Update</button><br />
+        </div>
+    </form>
+</body>

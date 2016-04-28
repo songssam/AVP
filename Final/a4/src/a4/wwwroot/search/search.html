@@ -1,0 +1,63 @@
+﻿<div id="contactform">
+    <h1>Search <small>What you need.</small></h1>
+    <form ng-submit="updateSearch()"> 
+        <div class="form-group" ng-required="true" ng-model="myctrl">
+            <input type="radio" ng-model="type" value="1" /><label>User</label>
+            <input type="radio" ng-model="type" value="2" /><label>Repository</label>
+            <input class="col-xs-11 col-sm-11" typeof="submit" name="name" style="visibility: visible;" ng-model="search_box" type="text" ng-required="true" />
+            <button class="btn btn-default col-xs-1 col-sm-1" style="float:right" ng-click="">Search</button>
+        </div>
+    </form>
+    <div class="col-xs-3 col-sm-3">
+        <input style="font-size: 2rem" placeholder="day" type="number" ng-model="day" width="25" />&nbspday&nbsp&nbsp&nbsp
+        <input style="font-size: 2rem" placeholder="hour" type="number" ng-model="hour" width="20" />&nbsphour
+    </div><button class="btn btn-danger col-xs-1 col-sm-1" ng-click="alarmSet()">Alarm</button>
+
+    <button class="btn btn-primary col-xs-1 col-sm-1" style="float:right" ui-sref="add">Add </button>
+    <button class="btn btn-info col-xs-1 col-sm-1" style="float:right" ui-sref="complete">Completed</button>
+
+    <br /><br /><br /><br />
+    <table class="table table-striped">
+        <tr>
+            <th>
+                <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                    description
+                    <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'saveData.description' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+
+            </th>
+            <th>
+                <a href="#" ng-click="sortType = 'dueDate'; sortReverse = !sortReverse">
+                    Due Date
+                    <span ng-show="sortType == 'dueDate' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'saveData.dueDate' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </th>
+            <th>Tag</th>
+            <th>State</th>
+            <th>Edit</th>
+        </tr>
+        <tr ng-repeat="data in data.saveData | orderBy:sortType:sortReverse |  filter: 'Active' as results">
+            <td bgcolor="{{data.check}}">
+                <h3>{{ data.description }}</h3>
+            </td>
+            <td bgcolor="{{data.check}}">
+                <h3>{{ data.dueDate }}</h3>
+            </td>
+            <td bgcolor="{{data.check}}">
+                <h3>{{ data.tags }}</h3>
+            </td>
+            <td bgcolor="{{data.check}}">
+                <h3>{{ data.state }}</h3>
+            </td>
+            <td>
+                <div form="edit">
+                    <a ng-click="updateResult(data.id)"><h3> Update </h3></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
