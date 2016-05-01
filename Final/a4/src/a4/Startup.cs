@@ -66,6 +66,7 @@ namespace a4
             services.AddEntityFramework().AddSqlServer().AddDbContext<toDoContext>();
             services.AddTransient<toDoAppSeedData>();
             services.AddScoped<ItoDoRepository, toDoRepository>();
+            services.AddScoped<IwarningRepository, warningRepository>();
 
         }
 

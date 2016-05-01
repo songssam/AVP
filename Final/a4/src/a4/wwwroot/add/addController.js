@@ -26,9 +26,9 @@
 
             if (!isNaN($scope.add_year) && !isNaN($scope.add_month) && !isNaN($scope.add_day) && !isNaN($scope.add_hour) && !isNaN($scope.add_minute)) {
 
-                $http.post('http://localhost:35000/api/project', item);
+                $http.post('/api/todo/', item);
                 $state.go('search');
-                location.reload();
+            //    location.reload();
             }
         }
     }

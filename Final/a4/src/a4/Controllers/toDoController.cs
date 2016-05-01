@@ -58,6 +58,13 @@ namespace a4.Controllers
             _repository.Create(newtoDo, (await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
         }
 
+
+        [HttpPost()]
+        public async Task POST([FromBody]toDo toDo)
+        {
+            _repository.Create(toDo, (await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
+        }
+
         // PUT api/project
         [HttpPut()]
         public void Put([FromBody]toDo toDo)

@@ -10,7 +10,7 @@ namespace a4.Repositories
     {
         void Update(warning warning);
 
-        IEnumerable<warning> List();
+        IEnumerable<warning> List(string username);
 
         warning FindById(int id);
         warning FindByUserName(string username);

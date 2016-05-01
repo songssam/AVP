@@ -25,9 +25,9 @@ namespace a4.Controllers
             _userManager = UserManager;
         }
         [HttpGet]
-        public async Task<warning> Get()
+        public async Task<IEnumerable<warning>> Get()
         {
-            return _repository.FindByUserName((await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
+            return _repository.List((await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
         }
         // GET api/todo/0
         [HttpGet("{id}")]

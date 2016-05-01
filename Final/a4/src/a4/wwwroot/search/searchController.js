@@ -15,97 +15,64 @@
         $scope.sortReverse = false;
         $scope.searchTodo = '';
         $scope.day = 0;
-        $scope.hour = 48;
+        $scope.hour = 0;
+
+        $scope.calledId;
+        $scope.calledTime;
+        $scope.calledUsername;
+
+        $scope.dbDay;
+        $scope.dbHour;
         $scope.calcHour = 0;
         $scope.init = 0;
 
         $scope.data = {
             saveData: [],
-            saveAlarm: []
+            alarmInfo: []
         }
         // get Time function
         console.log('111 ' + $scope.hour + ' ' + $scope.day)
 
-        $scope.alarmSet = function () {
+       
+       getTodo().then(
+                function (info) {
 
-            var now = moment(new Date());
-            if ($scope.day != 0) {
-                $scope.calcHour = $scope.hour + $scope.day * 24;
-                console.log('111 ' + $scope.calcHour + ' ' + $scope.day)
-            }
-            else {
-                $scope.calcHour = $scope.hour;
-            }
-            var setTime = moment(new Date());
-            setTime = setTime.add($scope.calcHour, 'hours');
+                    console.log('am i called')
+                    console.log($scope.data.saveData.length)
+                    $scope.data.saveData = info;
+                    
+                    for (var a = 0; a < $scope.data.saveData.length; a++) {
+                        var currentTime = moment.utc(info[a].dueDate).local();
+                        var realTime = moment.utc(info[a].dueDate).local().format('YYYY-MM-DD hh:mm A');
+                        
+                        $scope.data.saveData[a].dueDate = realTime;
 
-            console.log(now);
-            console.log(setTime);
-            for (var i = 0; i < $scope.data.saveData.length; i++) {
-                $scope.data.saveData[i].check = '';
-                var dueDateFromDB = $scope.data.saveData[i].dueDate;
-                console.log('D ' +dueDateFromDB);
-                // Diff btwn today and due
-                var diffFromToday = moment.duration(now.diff(dueDateFromDB));
-                console.log('here ' + diffFromToday);
-                var hours = diffFromToday.asHours();
-                console.log('hour ' + hours)
-                if (hours >= 12) {
-                    $scope.data.saveData[i].check = 'Red';
-                }
-                // Diff btwn set and due
-                var diffToSet = moment.duration(setTime.diff(dueDateFromDB));
+                        var diffTime = moment().add($scope.calledTime, 'hours');
 
+                        
+                        $scope.data.saveData[a].check = '';
 
-                var hours1 = diffToSet.asHours();
-                if (hours < 12 && hours1 > 12) {
-                    $scope.data.saveData[i].check = 'Yellow';
-                }
-            }
-        }
-
-        readResult().then(
-           function (imageUrl) {
-               $scope.data.saveData = imageUrl;
-               for (var i = 0; i < $scope.data.saveData.length; i++) {
-                   var localTime = moment($scope.data.saveData[i].dueDate).local().format('YYYY-MM-DD hh:mm A');
-                   $scope.data.saveData[i].dueDate = localTime;
-               }
-               if ($scope.init == 0) {
-                   console.log('before' + $scope.init)
-                   $scope.init = 1;
-                   console.log('after' + $scope.init)
-                   $scope.alarmSet();
-               }
-           });
-
+                             if (currentTime.isBefore(moment())) {
+                                 $scope.data.saveData[a].check = 'red';
+                             }
+         
+                             if (diffTime.isBefore(currentTime)) {
+                                 $scope.data.saveData[a].check = 'yellow';
+                             }
+                    }});
+      
         // pass too update
         $scope.updateResult = function (login) {
             $state.go('update', { login: login });
             console.log("login " + login);
         }
-
-        $scope.updateSearch = function () {
-
-            $scope.showTable = 0;
-            readResult().then(
-              function (imageUrl) {
-                  $scope.data.saveData = imageUrl;
-                  console.log(' DATA ' + $scope.data.saveData);
-                   $scope.alarmSet();
-           
-              });
-        }
-
-        function readResult() {
+   function readResult() {
             var deferred = $q.defer();
 
             if ($scope.search_box != null) {
                 $http.get('/api/todo/tag/' + $scope.search_box).then(
 
                function handleSuccess(response) {
-                   console.log('Hurray!');
-                   console.log('/api/todo/tag/')
                    deferred.resolve(response.data);
                });
             }
@@ -113,17 +80,12 @@
                 $http.get('/api/todo').then(
 
                 function handleSuccess(response) {
-                    console.log('Hurray!');
-                    console.log('/api/todo/tag/')
                     deferred.resolve(response.data);
                 });
             }
             return deferred.promise;
-
         }
-
-        // Delete Result;
-        $scope.deleteResult = function (realID) {
+          $scope.deleteResult = function (realID) {
             $scope.dealID = realID;
             getResult().then(
               function () {
@@ -133,9 +95,7 @@
 
             console.log($scope.data.saveData + ' Noresult');
         }
-
-
-        function getResult() {
+         function getResult() {
             $http.delete('/api/todo/' + $scope.dealID).then(
 
             function handleSuccess(response) {
@@ -143,10 +103,95 @@
                 console.log('/api/todo' + $scope.dealID)
             },
              function handleError(response) {
-                toastr.success('Register was successful', 'Good Job!');
-            });
+                 toastr.success('Register was successful', 'Good Job!');
+             });
             return deferred.promise;
         }
+         getWarning().then(
+            function (info) {
+                $scope.data.alarmInfo = info;
+                console.log('check ' + $scope.data.alarmInfo[0].userName);
+                $scope.calledId = $scope.data.alarmInfo[0].id;
+                $scope.calledTime = $scope.data.alarmInfo[0].time;
+                $scope.calledUsername = $scope.data.alarmInfo[0].userName;
 
-    }
+            });
+
+        function getWarning() {
+            var deferred = $q.defer();
+            $http.get('/api/warning').then(
+                function handleSuccess(response) {
+                    deferred.resolve(response.data);
+                });
+            return deferred.promise;
+        }
+        $scope.warningUpdate = function warningUpdate() {
+            if ($scope.day != 0 || $scope.data == null) {
+                $scope.calcHour = $scope.hour + $scope.day * 24;
+                console.log('111 ' + $scope.calcHour + ' ' + $scope.day)
+            }
+            else {
+                $scope.calcHour = $scope.hour;
+            }
+
+            var item = {
+                "id": $scope.calledId,
+                "time": $scope.calcHour,
+            }
+
+            console.log('clicked ' + $scope.calcHour)
+            $http.put("/api/warning/", item);
+            
+            location.reload();
+
+        }
+    
+        $scope.updateSearch = function updateResult() {
+            console.log('update called')
+            getTodo().then(
+                function (info) {
+
+                    console.log('am i called')
+                    console.log($scope.data.saveData.length)
+                    $scope.data.saveData = info;
+                    
+                    for (var a = 0; a < $scope.data.saveData.length; a++) {
+                        var currentTime = moment.utc(info[a].dueDate).local();
+                        var realTime = moment.utc(info[a].dueDate).local().format('YYYY-MM-DD hh:mm A');
+                        
+                        $scope.data.saveData[a].dueDate = realTime;
+
+                        var diffTime = moment().add($scope.calledTime, 'hours');
+
+                        
+                        $scope.data.saveData[a].check = '';
+
+                             if (currentTime.isBefore(moment())) {
+                                 $scope.data.saveData[a].check = 'red';
+                             }
+         
+                             if (diffTime.isBefore(currentTime)) {
+                                 $scope.data.saveData[a].check = 'yellow';
+                             }
+                    }});
+        }
+            function getTodo() {
+                var deferred = $q.defer();
+                console.log('get to do is called');
+                if ($scope.search_box != null) {
+                    $http.get('/api/todo/tag/' + $scope.search_box).then(
+
+                    function handleSuccess(response) {
+                        deferred.resolve(response.data);
+                    });
+                }
+                else {
+                    $http.get('/api/todo').then(
+                        function handleSuccess(response) {
+                            deferred.resolve(response.data);
+                        });
+                }
+                return deferred.promise;
+            }
+     }
 })();

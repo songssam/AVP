@@ -13,36 +13,51 @@
         }
 
 
-        // time format
-        readResult().then(
-          function (imageUrl) {
-              $scope.data.saveData = imageUrl;
-              for (var i = 0; i < $scope.data.saveData.length; i++) {
-                  var localTime = moment($scope.data.saveData[i].dueDate).local().format('YYYY-MM-DD hh:mm A');
-                  $scope.data.saveData[i].dueDate = localTime;
-              }
-              console.log(' DATA ' + $scope.data.saveData);
-          });
+        getTodo().then(
+                 function (info) {
 
-        // get values
-        $scope.updateSearch = function () {
+                     console.log('am i called')
+                     $scope.data.saveData = info;
 
-            $scope.showTable = 0;
-            readResult().then(
-              function (imageUrl) {
-                  $scope.data.saveData = imageUrl;
-                  console.log(' DATA ' + $scope.data.saveData);
-              });
-            console.log($scope.data.saveData + ' Noresult');
+                     for (var a = 0; a < $scope.data.saveData.length; a++) {
+                         var currentTime = moment.utc(info[a].dueDate).local();
+                         var realTime = moment.utc(info[a].dueDate).local().format('YYYY-MM-DD hh:mm A');
+
+                         $scope.data.saveData[a].dueDate = realTime;
+
+                         var diffTime = moment().add($scope.calledTime, 'hours');
+
+
+                         $scope.data.saveData[a].check = '';
+
+                         if (currentTime.isBefore(moment())) {
+                             $scope.data.saveData[a].check = 'red';
+                         }
+
+                         if (diffTime.isBefore(currentTime)) {
+                             $scope.data.saveData[a].check = 'yellow';
+                         }
+                     }
+                 });
+        
+        function getTodo() {
+            var deferred = $q.defer();
+            console.log('get to do is called');
+                            $http.get('/api/todo').then(
+                    function handleSuccess(response) {
+                        deferred.resolve(response.data);
+                    });
+            
+            return deferred.promise;
         }
 
         function readResult() {
             var deferred = $q.defer();
-            $http.get('http://localhost:35000/api/project').then(
+            $http.get('/api/project').then(
 
             function handleSuccess(response) {
                 console.log('Hurray!');
-                console.log('http://localhost:35000/api/project')
+                console.log('/api/project')
                 deferred.resolve(response.data);
             });
             return deferred.promise;
@@ -61,11 +76,11 @@
 
         function getResult() {
             var deferred = $q.defer();
-            $http.delete('http://localhost:35000/api/project/' + $scope.dealID).then(
+            $http.delete('/api/todo/' + $scope.dealID).then(
 
             function handleSuccess(response) {
                 console.log('Hurray!');
-                console.log('http://localhost:35000/api/project' + $scope.dealID)
+                console.log('/api/todo/' + $scope.dealID)
                 deferred.resolve(response.data);
             });
             return deferred.promise;

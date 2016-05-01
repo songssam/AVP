@@ -22,11 +22,11 @@ namespace a4.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<warning> List()
+        public IEnumerable<warning> List(string username)
         {
             //change list to only find the one listed by a certain username
             //(where clause)
-            return _context.warning.ToList();
+            return _context.warning.Where(p => p.UserName == username);
         }
 
         public warning FindById(int id)
