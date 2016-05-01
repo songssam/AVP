@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace a4.Repositories
 {
-   class warningRepository : IwarningRepository
+    public class warningRepository : IwarningRepository
     {
         private toDoContext _context;
 
@@ -17,26 +17,27 @@ namespace a4.Repositories
 
         public void Update(warning warning)
         {
-            var warningTime = FindById(warning.Id);
-            warningTime.Time = warning.Time;
+            var newTime = FindById(warning.Id);
+            newTime.Time = warning.Time;
             _context.SaveChanges();
         }
 
         public IEnumerable<warning> List()
         {
-            var warning = _context.warning.ToList();
-            return warning;
+            //change list to only find the one listed by a certain username
+            //(where clause)
+            return _context.warning.ToList();
         }
 
         public warning FindById(int id)
         {
-            var warning = _context.warning.First(p => p.Id == id);
-            return warning;
+            return _context.warning.First(p => p.Id == id);
         }
 
-        warning IwarningRepository.FindById(int id)
+        public warning FindByUserName(string username)
         {
-            throw new NotImplementedException();
+            return _context.warning.First(p => p.UserName == username);
         }
+
     }
 }

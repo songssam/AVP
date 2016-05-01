@@ -9,5 +9,6 @@ namespace a4.Models
     {
         public int Id { get; set; }
         public int Time { get; set; }
+        public string UserName { get; set; }
     }
 }

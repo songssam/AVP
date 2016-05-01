@@ -5,6 +5,8 @@ using Microsoft.AspNet.Mvc;
 using a4.Models;
 using a4.Repositories;
 using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,26 +17,27 @@ namespace a4.Controllers
     public class toDoController : Controller
     {
         private ItoDoRepository _repository;
-
-        public toDoController(ItoDoRepository repository)
+        private UserManager<toDoUser> _userManager;
+      
+        public toDoController(ItoDoRepository repository, UserManager<toDoUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
-        // GET: api/project
+        // GET: api/todo
         [HttpGet]
-        public IEnumerable<toDo> Get()
+        public async Task<IEnumerable<toDo>> Get()
         {
-            var toDo = _repository.List();
-            return toDo;
+            return _repository.List((await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
         }
-        // GET api/project/0
+        // GET api/todo/0
         [HttpGet("{id}")]
         public toDo Get(int id)
         {
             return _repository.FindById(id);
         }
 
-        // GET api/project/search/{queryString}
+        // GET api/todo/search/{queryString}
         [HttpGet("search/{queryString}")]
         public IEnumerable<toDo> Search(string queryString)
         {
@@ -43,17 +46,16 @@ namespace a4.Controllers
 
         // Get api/proejct/tag/{queryString}
         [HttpGet("tag/{queryString}")]
-        public IEnumerable<toDo> Tag(string queryString)
+        public async Task<IEnumerable<toDo>> Tag(string queryString, string username)
         {
-            return _repository.Tag(queryString);
+            return _repository.Tag(queryString, (await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]toDo newtoDo)
+        // POST api/todo/register
+        [HttpPost("register")]
+        public async Task Post([FromBody]toDo newtoDo)
         {
-            Response.StatusCode = (int)HttpStatusCode.Created;
-            _repository.Create(newtoDo);
+            _repository.Create(newtoDo, (await _userManager.FindByNameAsync(User.Identity.Name)).UserName);
         }
 
         // PUT api/project

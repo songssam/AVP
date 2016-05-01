@@ -41,7 +41,6 @@ namespace a4
                 c =>
                 {
                     c.Password.RequiredLength = 8;
-                    c.User.RequireUniqueEmail = true;
                     c.Password.RequireNonLetterOrDigit = false;
                     c.Password.RequireUppercase = true;
                     c.Password.RequireLowercase = true;

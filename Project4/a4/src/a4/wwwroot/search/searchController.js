@@ -101,20 +101,20 @@
             var deferred = $q.defer();
 
             if ($scope.search_box != null) {
-                $http.get('http://localhost:35000/api/project/tag/' + $scope.search_box).then(
+                $http.get('/api/project/tag/' + $scope.search_box).then(
 
                function handleSuccess(response) {
                    console.log('Hurray!');
-                   console.log('http://localhost:35000/api/project/tag/')
+                   console.log('/api/project/tag/')
                    deferred.resolve(response.data);
                });
             }
             else {
-                $http.get('http://localhost:35000/api/project').then(
+                $http.get('/api/project').then(
 
                 function handleSuccess(response) {
                     console.log('Hurray!');
-                    console.log('http://localhost:35000/api/project/tag/')
+                    console.log('/api/project/tag/')
                     deferred.resolve(response.data);
                 });
             }
@@ -135,11 +135,11 @@
 
         function getResult() {
             var deferred = $q.defer();
-            $http.delete('http://localhost:35000/api/project/' + $scope.dealID).then(
+            $http.delete('/api/project/' + $scope.dealID).then(
 
             function handleSuccess(response) {
                 console.log('Hurray!');
-                console.log('http://localhost:35000/api/project' + $scope.dealID)
+                console.log('/api/project' + $scope.dealID)
                 deferred.resolve(response.data);
             });
             return deferred.promise;

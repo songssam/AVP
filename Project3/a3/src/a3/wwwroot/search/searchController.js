@@ -42,7 +42,7 @@
 
         $scope.updateSearch = function () {
             console.log($scope.bigCurrentPage);
-           
+
             $scope.showTable = 0;
             if ($scope.type == 1) {
                 getUser().then(
@@ -50,19 +50,17 @@
                       $scope.data.saveData = imageUrl.items;
                       $scope.check = imageUrl.total_count;
                       console.log(' DATA ' + $scope.data.saveData);
-                      if($scope.check == 0){
+                      if ($scope.check == 0) {
                           console.log(' check ' + $scope.check);
-                          if ($scope.check / 10 >= 100)
-                          {
-                              $scope.numPages = 100 ;
+                          if ($scope.check / 10 >= 100) {
+                              $scope.numPages = 100;
                           }
-                          else
-                          {
+                          else {
                               $scope.numPages = $scope.check / 10;
                           }
                           $scope.showTable = 7;
                       }
-                      
+
                   });
             }
             else if ($scope.type == 2) {
@@ -91,7 +89,7 @@
                 deferred.resolve(response.data);
                 $scope.type = 1;
                 $scope.showTable = 1;
-                
+
             });
             return deferred.promise;
         }

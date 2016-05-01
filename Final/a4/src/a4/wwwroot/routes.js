@@ -7,13 +7,21 @@
 
             $urlRouterProvider.otherwise("/");
 
-            // $httpProvider.interceptors.push('myHttpInterceptor');
-            //
-            // Now set up the states
-
+            $httpProvider.interceptors.push('myHttpInterceptor');
+  
             $stateProvider
-            .state('search', {
+            .state('login', {
                 url: "/",
+                templateUrl: "login/login.html",
+                controller: 'loginController'
+            })
+            .state('register', {
+                url: "/register",
+                templateUrl: "register/register.html",
+                controller: 'registerController'
+            })
+            .state('search', {
+                url: "/search",
                 templateUrl: "search/search.html",
                 controller: 'searchController'
             })

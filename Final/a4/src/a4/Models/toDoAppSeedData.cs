@@ -22,7 +22,6 @@ namespace a4.Models
                 var defaultUser = new toDoUser()
                 {
                     UserName = "Samuel",
-                    Email = "ssong3@uco.edu"
                 };
                 await _userManager.CreateAsync(defaultUser, "ASDqwe123"); 
             }
@@ -32,87 +31,35 @@ namespace a4.Models
                 {
                     tags = "life, business",
                     description = "Wake up early in the morning",
-                    dueDate = new DateTime(2015, 3, 4, 6, 0, 0),
-                    state = "Active"
+                    dueDate = new DateTime(2015, 5, 4, 6, 0, 0),
+                    state = "Active",
+                    UserName = "Samuel"
                 });
                 _context.Add(new toDo()
                 {
                     tags = "life",
                     description = "Eat well",
                     dueDate = new DateTime(2015, 3, 5, 12, 0, 0),
-                    state = "Active"
+                    state = "Active",
+                    UserName = "Jessica"
                 });
                 _context.Add(new toDo()
                 {
                     tags = "business",
                     description = "Skip work",
                     dueDate = new DateTime(2015, 4, 4, 12, 0, 0),
-                    state = "Completed"
+                    state = "Completed",
+                    UserName = "Samuel"
                 });
-                _context.Add(new toDo()
+                if (!_context.warning.Any())
                 {
-                    tags = "business",
-                    description = "Drink coffee",
-                    dueDate = new DateTime(2015, 4, 5, 12, 0, 0),
-                    state = "Completed"
-                }); _context.Add(new toDo()
-                {
-                    tags = "business",
-                    description = "Clean the desk",
-                    dueDate = new DateTime(2015, 4, 6, 12, 0, 0),
-                    state = "Completed"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "business",
-                    description = "Check the schedule",
-                    dueDate = new DateTime(2016, 4, 4, 12, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "business",
-                    description = "Go to bathroom",
-                    dueDate = new DateTime(2016, 4, 4, 15, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "business",
-                    description = "Go to meet a buyer",
-                    dueDate = new DateTime(2016, 4, 4, 18, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "family",
-                    description = "Go grocery",
-                    dueDate = new DateTime(2016, 4, 5, 17, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "family",
-                    description = "Prepare for family dinner",
-                    dueDate = new DateTime(2016, 4, 5, 18, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "school",
-                    description = "Do the homework",
-                    dueDate = new DateTime(2016, 4, 6, 18, 0, 0),
-                    state = "Active"
-                });
-                _context.Add(new toDo()
-                {
-                    tags = "school",
-                    description = "Skip the class",
-                    dueDate = new DateTime(2016, 4, 7, 15, 0, 0),
-                    state = "Active"
-                });
+                    _context.Add(new warning()
+                    {
+                        Time = 48,
+                        UserName = "Samuel"
+                    });
+                }
                 _context.SaveChanges();
-
             }
         }
     }

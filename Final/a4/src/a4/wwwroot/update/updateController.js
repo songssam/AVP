@@ -26,10 +26,10 @@
 
             function readResult() {
                 var deferred = $q.defer();
-                $http.get('/api/project/' + $scope.login.login).then(
+                $http.get('/api/todo/' + $scope.login.login).then(
 
                 function handleSuccess(response) {
-                    console.log('/api/project/' + $scope.login.login)
+                    console.log('/api/todo/' + $scope.login.login)
                     console.log('check' + $scope.data)
                     deferred.resolve(response.data);
                 });
@@ -47,11 +47,12 @@
                 }
                 console.log('I am called')
 
+                $http.put('/api/todo/', item);
                 if (!isNaN($scope.add_year) && !isNaN($scope.add_month) && !isNaN($scope.add_day) && !isNaN($scope.add_hour) && !isNaN($scope.add_minute)) {
-                    $http.put('/api/project/', item);
+                    $http.put('/api/todo/', item);
                     $state.go('search');
                     location.reload();
-
+                   
                 }
             }
         }

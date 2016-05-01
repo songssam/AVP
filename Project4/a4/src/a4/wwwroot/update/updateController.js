@@ -26,10 +26,10 @@
 
             function readResult() {
                 var deferred = $q.defer();
-                $http.get('http://localhost:35000/api/project/' + $scope.login.login).then(
+                $http.get('/api/project/' + $scope.login.login).then(
 
                 function handleSuccess(response) {
-                    console.log('http://localhost:35000/api/project/' + $scope.login.login)
+                    console.log('/api/project/' + $scope.login.login)
                     console.log('check' + $scope.data)
                     deferred.resolve(response.data);
                 });
@@ -48,7 +48,7 @@
                 console.log('I am called')
 
                 if (!isNaN($scope.add_year) && !isNaN($scope.add_month) && !isNaN($scope.add_day) && !isNaN($scope.add_hour) && !isNaN($scope.add_minute)) {
-                    $http.put('http://localhost:35000/api/project/', item);
+                    $http.put('/api/project/', item);
                     $state.go('search');
                     location.reload();
 

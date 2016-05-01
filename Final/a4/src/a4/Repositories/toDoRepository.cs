@@ -6,7 +6,7 @@ using a4.Models;
 
 namespace a4.Repositories
 {
-    class toDoRepository : ItoDoRepository
+    public class toDoRepository : ItoDoRepository
     {
         private toDoContext _context;
 
@@ -14,8 +14,9 @@ namespace a4.Repositories
         {
             _context = context;
         }
-        public void Create(toDo toDo)
+        public void Create(toDo toDo, string username)
         {
+            toDo.UserName = username;
             _context.toDo.Add(toDo);
             _context.SaveChanges();
         }
@@ -40,15 +41,17 @@ namespace a4.Repositories
             _context.SaveChanges();
         }
 
+        /*
         public IEnumerable<toDo> List()
         {
             var toDo = _context.toDo.ToList();
             return toDo;
         }
+        */
 
         public toDo FindById(int id)
         {
-            var toDo = _context.toDo.First(p => p.Id == id);
+           var toDo = _context.toDo.First(p => p.Id == id);
             return toDo;
         }
 
@@ -58,12 +61,18 @@ namespace a4.Repositories
             return _context.toDo.Where(p => p.tags.Contains(queryString));
         }
 
-        public IEnumerable<toDo> Tag(string queryString)
+        public IEnumerable<toDo> Tag(string queryString, string username)
         {
             List<string> tags = queryString.Split(',').ToList();
             return (from word in _context.toDo
-                    where tags.All(tag => word.tags.Contains(tag))
+                    where tags.All(tag => word.tags.Contains(tag)) && word.UserName == username
                     select word).ToList();
+        }
+
+        public IEnumerable<toDo> List(string username)
+        {
+            var item = _context.toDo.Where(p => p.UserName == username);
+            return item;
         }
     }
 }

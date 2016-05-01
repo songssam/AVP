@@ -13,5 +13,6 @@ namespace a4.Repositories
         IEnumerable<warning> List();
 
         warning FindById(int id);
+        warning FindByUserName(string username);
     }
 }

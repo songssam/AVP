@@ -89,6 +89,8 @@ namespace a4.Migrations
 
                     b.Property<int>("Time");
 
+                    b.Property<string>("UserName");
+
                     b.HasKey("Id");
                 });
 

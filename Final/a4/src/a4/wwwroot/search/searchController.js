@@ -101,20 +101,20 @@
             var deferred = $q.defer();
 
             if ($scope.search_box != null) {
-                $http.get('/api/project/tag/' + $scope.search_box).then(
+                $http.get('/api/todo/tag/' + $scope.search_box).then(
 
                function handleSuccess(response) {
                    console.log('Hurray!');
-                   console.log('/api/project/tag/')
+                   console.log('/api/todo/tag/')
                    deferred.resolve(response.data);
                });
             }
             else {
-                $http.get('/api/project').then(
+                $http.get('/api/todo').then(
 
                 function handleSuccess(response) {
                     console.log('Hurray!');
-                    console.log('/api/project/tag/')
+                    console.log('/api/todo/tag/')
                     deferred.resolve(response.data);
                 });
             }
@@ -122,6 +122,7 @@
 
         }
 
+        // Delete Result;
         $scope.deleteResult = function (realID) {
             $scope.dealID = realID;
             getResult().then(
@@ -133,18 +134,19 @@
             console.log($scope.data.saveData + ' Noresult');
         }
 
+
         function getResult() {
-            var deferred = $q.defer();
-            $http.delete('/api/project/' + $scope.dealID).then(
+            $http.delete('/api/todo/' + $scope.dealID).then(
 
             function handleSuccess(response) {
                 console.log('Hurray!');
-                console.log('/api/project' + $scope.dealID)
-                deferred.resolve(response.data);
+                console.log('/api/todo' + $scope.dealID)
+            },
+             function handleError(response) {
+                toastr.success('Register was successful', 'Good Job!');
             });
             return deferred.promise;
         }
 
-        function activate() { }
     }
 })();
